@@ -1,29 +1,40 @@
 // Get a reference to the #add-employees-btn element
 const addEmployeesBtn = document.querySelector('#add-employees-btn');
 // employeesArray is in global scope so that when the collectEmployees function is called again, it will not reset
-employeesArray = [];
+let employeesArray = [];
 // Collect employee data
 const collectEmployees = function () {
 	// Get user input to create and return an array of employee objects
-	//TODO: CHECK IF THE INPUT IS VALID
-	let repeatPrompt = true;
 
+	let repeatPrompt = true;
 	while (repeatPrompt) {
-		employeeTest = {};
+		// Cannot have employee object in global scope because it will keep overriding past entries if I do not keep a number tracker as the key
+		// Doing it this way rids of the need of the number tracker as it always updates the employees array while still keeping track of the index
+		let employeeTest = {};
+
+		// Obtain user input and check if it is valid
 		let firstName = prompt('Please enter your first name.');
 		if (firstName === null) {
 			return;
 		}
+		while (firstName === '') {
+			firstName = prompt('Invalid first name. Please try again.');
+		}
+
 		let lastName = prompt('Please enter your last name.');
 		if (lastName === null) {
 			return;
 		}
+		while (lastName === '') {
+			lastName = prompt('Invalid last name. Please try again.');
+		}
+
 		let salary = parseInt(prompt('Please enter your salary.'));
 		if (salary === null) {
 			return;
 		}
-		while (isNaN(salary)) {
-			salary = parseInt(prompt('That is not a number, try again.'));
+		while (salary === 0 || isNaN(salary)) {
+			salary = parseInt(prompt('Invalid salary. Please try again.'));
 		}
 
 		employeeTest['firstName'] = firstName;
@@ -34,6 +45,7 @@ const collectEmployees = function () {
 
 		repeatPrompt = confirm('Do you want to add another employee?');
 	}
+
 	return employeesArray;
 	// console.log(employeeMess);
 };
@@ -59,6 +71,7 @@ const getRandomEmployee = function (employeesArray) {
 	let randomNumber = Math.floor(Math.random() * employeesArray.length);
 	firstName = employeesArray[randomNumber].firstName;
 	lastName = employeesArray[randomNumber].lastName;
+
 	console.log(
 		`Congratulations to ${firstName} ${lastName}, our random drawing winner!`
 	);
