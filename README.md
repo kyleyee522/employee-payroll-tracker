@@ -6,6 +6,8 @@
 
 * This project was created in order to get hands-on practice in creating JavaScript functions and to familiarize myself with prompts and alerts on the webpage. Likewise, this project gave me experience in creating objects and obtaining values from a key-value pair and creating both for and while loops.
 
+* To try the website out, you may clone this repo or use this link: https://kyleyee522.github.io/employee-payroll-tracker/
+
 ## Assets
 
 The image below is the landing page:
